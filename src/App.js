@@ -1,5 +1,4 @@
 import React from 'react'
-import * as BooksAPI from './data/BooksAPI'
 import './css/App.css'
 import AddBook from './AddBook'
 import BookShelf from './BookShelf'
