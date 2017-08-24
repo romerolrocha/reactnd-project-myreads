@@ -1,4 +1,7 @@
 {
+  "name": "reacrnd-project-myreads",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
   "dependencies": {
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
