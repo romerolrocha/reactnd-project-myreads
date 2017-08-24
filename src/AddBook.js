@@ -12,10 +12,20 @@ class AddBook extends Component {
 
   updateQuery = (query) => {
     if(query) {
-      BooksAPI.search(query.trim(), 20).then(books => this.setState({ books }));
+      BooksAPI.search(query.trim(), 20).then(books => {
+        if(books.length > 0) {
+          this.setState({ books })
+        } else {
+          this.cleanBookSearch();
+        }
+      });
     } else {
-      this.setState({ books: [] })
+      this.cleanBookSearch();
     }
+  }
+
+  cleanBookSearch = () => {
+    this.setState({ books: [] });
   }
 
   render() {
