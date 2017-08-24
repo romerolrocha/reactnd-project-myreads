@@ -1,46 +1,41 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import * as BooksAPI from './data/BooksAPI'
+import * as BooksAPI from './api/BooksAPI'
+import { Debounce } from 'react-throttle';
+import BookList from './data/BookList'
 
 class AddBook extends Component {
 
   state = {
-    books: [],
-    query: ''
+    books: []
   }
 
-  updateQuery = (e) => {
-    if(e.target.value) {
-      this.setState({query: e.target.value});
-      BooksAPI.search(e.target.value, 20).then(books => {
-        this.setState({ books });
-      });
+  updateQuery = (query) => {
+    if(query) {
+      BooksAPI.search(query.trim(), 20).then(books => this.setState({ books }));
     } else {
-      this.setState({query: ''});
+      this.setState({ books: [] })
     }
   }
 
   render() {
 
-    const { books , query } = this.state;
+    const { books } = this.state;
 
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link className='close-search' to='/'>Close</Link>
           <div className="search-books-input-wrapper">
-            <input type="text" 
-              value={query}
-              onChange={this.updateQuery}
-              placeholder="Search by title or author"/>
+            <Debounce time="500" handler="onChange">
+              <input type="text" 
+                  onChange={(event) => this.updateQuery(event.target.value)}
+                  placeholder="Search by title or author"/>
+            </Debounce>
           </div>
         </div>
         <div className="search-books-results">
-          {books.map(book => (
-            <ol key={book.id} className="books-grid">
-              {book.title}
-            </ol>
-          ))}
+          <BookList books={books} />
         </div>
       </div>
     );
