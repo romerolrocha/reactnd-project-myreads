@@ -21,7 +21,7 @@ class BookShelves extends Component {
     })
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.loadBooks('nggnmAEACAAJ');
     this.loadBooks('Xi34AwAAQBAJ');
     this.loadBooks('YpknWQLzVA4C');
