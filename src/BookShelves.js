@@ -6,31 +6,25 @@ import * as BooksAPI from './api/BooksAPI'
 class BookShelves extends Component {
 
   state = {
-    reading: [],
+    currentlyReading: [],
     wantToRead: [],
     read: []
   }
 
-  loadBooks(id) {
-    let { reading, wantToRead, read } = this.state;
-    BooksAPI.get(id).then(book => {
-        reading.push(book);
-        read.push(book);
-        wantToRead.push(book);
-        this.setState({ reading, wantToRead, read });
-    })
+  componentDidMount() {
+    BooksAPI.getAll().then(books => this.arrangeBooks(books));
   }
 
-  componentWillMount() {
-    this.loadBooks('nggnmAEACAAJ');
-    this.loadBooks('Xi34AwAAQBAJ');
-    this.loadBooks('YpknWQLzVA4C');
-    this.loadBooks('4ymVpRiXsMIC');
-    this.loadBooks('gW6yXkPWhfcC');
+  arrangeBooks = (books) => {
+    let currentlyReading = books.filter(book => book.shelf === 'currentlyReading');
+    let wantToRead = books.filter(book => book.shelf === 'wantToRead');
+    let read = books.filter(book => book.shelf === 'read');
+
+    this.setState({ currentlyReading, wantToRead, read });
   }
 
   render() {
-    const { reading, wantToRead, read } = this.state;
+    const { currentlyReading, wantToRead, read } = this.state;
 
     return (
       <div className="list-books">
@@ -39,7 +33,7 @@ class BookShelves extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf title='Currently Reading' books={reading} />
+            <BookShelf title='Currently Reading' books={currentlyReading} />
           </div>
           <div>
             <BookShelf title='Want to Read' books={wantToRead} />
