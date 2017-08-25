@@ -12,19 +12,19 @@ class AddBook extends Component {
 
   updateQuery = (query) => {
     if(!query) {
-      this.cleanBookSearch();
+      this.clearBookSearch();
     }
 
     BooksAPI.search(query.trim(), 20).then(books => {
       if(books.length > 0) {
         this.setState({ books });
       } else {
-        this.cleanBookSearch();
+        this.clearBookSearch();
       }
     });
   }
 
-  cleanBookSearch = () => {
+  clearBookSearch = () => {
     this.setState({ books: [] });
   }
 
