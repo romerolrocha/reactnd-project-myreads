@@ -11,17 +11,17 @@ class AddBook extends Component {
   }
 
   updateQuery = (query) => {
-    if(query) {
-      BooksAPI.search(query.trim(), 20).then(books => {
-        if(books.length > 0) {
-          this.setState({ books })
-        } else {
-          this.cleanBookSearch();
-        }
-      });
-    } else {
+    if(!query) {
       this.cleanBookSearch();
     }
+
+    BooksAPI.search(query.trim(), 20).then(books => {
+      if(books.length > 0) {
+        this.setState({ books });
+      } else {
+        this.cleanBookSearch();
+      }
+    });
   }
 
   cleanBookSearch = () => {
@@ -38,7 +38,7 @@ class AddBook extends Component {
           <Link className='close-search' to='/'>Close</Link>
           <div className="search-books-input-wrapper">
             <Debounce time="500" handler="onChange">
-              <input type="text" 
+              <input type="text"
                   onChange={(event) => this.updateQuery(event.target.value)}
                   placeholder="Search by title or author"/>
             </Debounce>

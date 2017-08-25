@@ -13,11 +13,9 @@ class BookList extends Component {
 
     return (
       <div>
-        {books.map(item => (
-          <ol key={item.id} className="books-grid">
-            <Book book={item}/>
-          </ol>
-        ))}
+        <ol className="books-grid">
+          {books.map(item => (<Book book={item} />))}
+        </ol>
       </div>
     );
   }

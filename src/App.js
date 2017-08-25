@@ -1,10 +1,10 @@
 import React from 'react'
 import './css/App.css'
-import AddBook from './AddBook'
+import BookSearch from './BookSearch'
 import BookShelf from './BookShelf'
 import { Route } from 'react-router-dom'
 
-class BooksApp extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <div className="app">
@@ -12,11 +12,11 @@ class BooksApp extends React.Component {
           <BookShelf />
         )}/>
         <Route path='/add' render={() => (
-          <AddBook />
+          <BookSearch />
         )}/>
       </div>
     )
   }
 }
 
-export default BooksApp
+export default App
