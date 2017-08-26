@@ -8,10 +8,11 @@ class Book extends Component {
   };
 
   moveBook = shelf => {
-    BooksAPI.update(this.props.book, shelf).then(response => {
+    const { book } = this.props;
+    BooksAPI.update(book, shelf).then(response => {
       if (response) {
-        this.props.book.shelf = shelf;
-        this.props.moveBook();
+        book.shelf = shelf;
+        this.props.moveBook(book);
       }
     });
   };

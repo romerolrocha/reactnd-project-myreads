@@ -24,10 +24,18 @@ class BookShelves extends Component {
     this.setState({ currentlyReading, wantToRead, read });
   };
 
-  moveBook = () => {
+  moveBook = book => {
     const { currentlyReading, wantToRead, read } = this.state;
-    this.setState({ currentlyReading, wantToRead, read });
-    console.log('oi');
+
+    this.setState({
+      currentlyReading: this.removeBookFromShelf(book, currentlyReading),
+      wantToRead: this.removeBookFromShelf(book, wantToRead),
+      read: this.removeBookFromShelf(book, read)
+    });
+  };
+
+  removeBookFromShelf = (movedBook, shelf) => {
+    return shelf.filter(book => book.id !== movedBook.id);
   };
 
   render() {

@@ -28,6 +28,13 @@ class BookSearch extends Component {
     this.setState({ books: [] });
   };
 
+  moveBook = addedBook => {
+    const showingBooks = this.state.books.filter(
+      book => book.id !== addedBook.id
+    );
+    this.setState({ books: showingBooks });
+  };
+
   render() {
     const { books } = this.state;
 
@@ -48,7 +55,7 @@ class BookSearch extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <BookList books={books} />
+          <BookList books={books} moveBook={this.moveBook} />
         </div>
       </div>
     );
