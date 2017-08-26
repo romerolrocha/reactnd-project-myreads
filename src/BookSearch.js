@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as BooksAPI from './api/BooksAPI';
 import { Debounce } from 'react-throttle';
+import * as BooksAPI from './api/BooksAPI';
 import BookList from './data/BookList';
 
 class BookSearch extends Component {
