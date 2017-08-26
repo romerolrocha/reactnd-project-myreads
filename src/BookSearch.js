@@ -4,7 +4,7 @@ import * as BooksAPI from './api/BooksAPI';
 import { Debounce } from 'react-throttle';
 import BookList from './data/BookList';
 
-class AddBook extends Component {
+class BookSearch extends Component {
   state = {
     books: []
   };
@@ -12,6 +12,7 @@ class AddBook extends Component {
   updateQuery = query => {
     if (!query) {
       this.clearBookSearch();
+      return;
     }
 
     BooksAPI.search(query.trim(), 20).then(books => {
@@ -54,4 +55,4 @@ class AddBook extends Component {
   }
 }
 
-export default AddBook;
+export default BookSearch;
