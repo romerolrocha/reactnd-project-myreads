@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as BooksAPI from '../api/BooksAPI';
 
 class Book extends Component {
   static propTypes = {
-    book: PropTypes.object.isRequired
-  };
-
-  moveBook = shelf => {
-    const { book } = this.props;
-    BooksAPI.update(book, shelf).then(response => {
-      if (response) {
-        book.shelf = shelf;
-        this.props.moveBook(book);
-      }
-    });
+    book: PropTypes.object.isRequired,
+    moveBook: PropTypes.func.isRequired
   };
 
   render() {
-    const { book } = this.props;
+    const { book, moveBook } = this.props;
 
     return (
       <div className="book">
@@ -33,7 +23,7 @@ class Book extends Component {
           />
           <div className="book-shelf-changer">
             <select
-              onChange={event => this.moveBook(event.target.value)}
+              onChange={event => moveBook(book, event.target.value)}
               value={book.shelf}
             >
               <option value="none">None</option>

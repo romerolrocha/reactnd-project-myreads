@@ -9,9 +9,9 @@ class BookSearch extends Component {
     books: []
   };
 
-  updateQuery = query => {
+  executeQuery = query => {
     if (!query) {
-      this.clearBookSearch();
+      this.setState({ books: [] });
       return;
     }
 
@@ -19,20 +19,19 @@ class BookSearch extends Component {
       if (books.length > 0) {
         this.setState({ books });
       } else {
-        this.clearBookSearch();
+        this.setState({ books: [] });
       }
     });
   };
 
-  clearBookSearch = () => {
-    this.setState({ books: [] });
-  };
-
-  moveBook = addedBook => {
-    const showingBooks = this.state.books.filter(
-      book => book.id !== addedBook.id
-    );
-    this.setState({ books: showingBooks });
+  moveBook = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(response => {
+      if (response) {
+        book.shelf = shelf;
+        const books = this.state.books.filter(item => book.id !== item.id);
+        this.setState({ books });
+      }
+    });
   };
 
   render() {
@@ -48,7 +47,7 @@ class BookSearch extends Component {
             <Debounce time="500" handler="onChange">
               <input
                 type="text"
-                onChange={event => this.updateQuery(event.target.value)}
+                onChange={event => this.executeQuery(event.target.value)}
                 placeholder="Search by title or author"
               />
             </Debounce>

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 class BookList extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    moveBook: PropTypes.func.isRequired
   };
 
   render() {

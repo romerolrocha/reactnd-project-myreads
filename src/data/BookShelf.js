@@ -5,7 +5,8 @@ import BookList from './BookList';
 class BookShelf extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    moveBook: PropTypes.func.isRequired
   };
 
   render() {
