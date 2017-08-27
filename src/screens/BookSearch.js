@@ -16,7 +16,7 @@ class BookSearch extends Component {
     offset: 14,
     position: 'bottom left',
     theme: 'light',
-    time: 5000,
+    time: 2000,
     transition: 'scale'
   };
 
