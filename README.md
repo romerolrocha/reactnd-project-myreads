@@ -1,6 +1,23 @@
-This is part of Udacity's React Nanodegree. It's the implementation of Part I - React Fundamentals - project.
+> This is part of Udacity's React Nanodegree. It's the implementation of Part I - React Fundamentals - project. It's built for academic purposes only.
 
-It's built for academic purposes only.
+## Installation
+* Clone the project.
+* Run [npm](https://www.npmjs.com) OR [yarn](https://yarnpkg.com/) install command:
+```bash
+$ npm install
+```
+```bash
+$ yarn install
+```
+
+## Running
+After installing the project, run one of the commands below:
+```bash
+$ npm start
+```
+```bash
+$ yarn start
+```
 
 ## Project Structure
 
