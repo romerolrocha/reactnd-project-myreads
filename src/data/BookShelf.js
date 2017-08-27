@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BookList from './BookList';
+import ReactLoading from 'react-loading';
 
 class BookShelf extends Component {
   static propTypes = {
@@ -9,6 +10,14 @@ class BookShelf extends Component {
     moveBook: PropTypes.func.isRequired
   };
 
+  state = {
+    loading: true
+  };
+
+  componentWillReceiveProps() {
+    this.setState({ loading: false });
+  }
+
   render() {
     return (
       <div className="bookshelf">
@@ -16,7 +25,17 @@ class BookShelf extends Component {
           {this.props.title}
         </h2>
         <div className="bookshelf-books">
-          <BookList books={this.props.books} moveBook={this.props.moveBook} />
+          {this.state.loading
+            ? <ReactLoading
+                type="spin"
+                delay={1}
+                color="#6568a4"
+                className="loader"
+              />
+            : <BookList
+                books={this.props.books}
+                moveBook={this.props.moveBook}
+              />}
         </div>
       </div>
     );

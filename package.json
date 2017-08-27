@@ -1,11 +1,13 @@
 {
   "name": "reacrnd-project-myreads",
   "version": "0.1.0",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
+    "react-alert": "^2.2.0",
     "react-dom": "^15.5.4",
+    "react-loading": "^0.1.4",
     "react-router-dom": "^4.1.2",
     "react-throttle": "^0.3.0"
   },

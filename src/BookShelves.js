@@ -2,12 +2,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import BookShelf from './data/BookShelf';
 import * as BooksAPI from './api/BooksAPI';
+import AlertContainer from 'react-alert';
 
 class BookShelves extends Component {
   state = {
     currentlyReading: [],
     wantToRead: [],
     read: []
+  };
+
+  alertOptions = {
+    offset: 14,
+    position: 'top left',
+    theme: 'light',
+    time: 5000,
+    transition: 'scale'
   };
 
   componentDidMount() {
@@ -30,8 +39,19 @@ class BookShelves extends Component {
           .concat(this.state.wantToRead)
           .concat(this.state.read);
         this.arrangeBooks(books);
+        this.handleMovingMessage(book);
+      } else {
+        this.msg.error('Error ocurred trying to move book.');
       }
     });
+  };
+
+  handleMovingMessage = book => {
+    if (book.shelf === 'none') {
+      this.msg.success(`Book '${book.title}' removed from shelf.`);
+    } else {
+      this.msg.success(`Moved '${book.title}'.`);
+    }
   };
 
   render() {
@@ -63,6 +83,9 @@ class BookShelves extends Component {
         </div>
         <div className="open-search">
           <Link to="/add">Add a book</Link>
+        </div>
+        <div>
+          <AlertContainer ref={a => (this.msg = a)} {...this.alertOptions} />
         </div>
       </div>
     );

@@ -3,10 +3,19 @@ import { Link } from 'react-router-dom';
 import { Debounce } from 'react-throttle';
 import * as BooksAPI from './api/BooksAPI';
 import BookList from './data/BookList';
+import AlertContainer from 'react-alert';
 
 class BookSearch extends Component {
   state = {
     books: []
+  };
+
+  alertOptions = {
+    offset: 14,
+    position: 'bottom left',
+    theme: 'light',
+    time: 5000,
+    transition: 'scale'
   };
 
   executeQuery = query => {
@@ -30,6 +39,7 @@ class BookSearch extends Component {
         book.shelf = shelf;
         const books = this.state.books.filter(item => book.id !== item.id);
         this.setState({ books });
+        this.msg.success(`Book '${book.title}' added to shelf.`);
       }
     });
   };
@@ -54,7 +64,15 @@ class BookSearch extends Component {
           </div>
         </div>
         <div className="search-books-results">
+          <h4 className="results-text">
+            {books.length > 0
+              ? `Showing ${books.length} results.`
+              : 'No results were found.'}
+          </h4>
           <BookList books={books} moveBook={this.moveBook} />
+        </div>
+        <div>
+          <AlertContainer ref={a => (this.msg = a)} {...this.alertOptions} />
         </div>
       </div>
     );
