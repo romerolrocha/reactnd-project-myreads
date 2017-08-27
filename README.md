@@ -42,4 +42,4 @@ Application's main navigation screens.
 This application makes use of some third-part licenced components and respects all rights reserved. See more at [LICENSE](LICENSE)
 
 ## Contributing
-The files in this repository are created for Udacity's 'React Nanodegree Course'. Its purpose is only academic, intending to meet the requirements of PART ONE's project, 'MyReads'. Any further contribution is unlikely to be merged.
+The files in this repository are created for Udacity's 'React Nanodegree Course'. Its purpose is only academic, intending to meet the requirements of project 'MyReads'. Any further contribution is unlikely to be merged.

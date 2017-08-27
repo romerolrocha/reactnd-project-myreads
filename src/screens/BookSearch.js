@@ -20,7 +20,7 @@ class BookSearch extends Component {
     transition: 'scale'
   };
 
-  executeQuery = query => {
+  executeQuery = (query, existingBooks) => {
     if (!query) {
       this.setState({ books: [] });
       return;
@@ -30,6 +30,7 @@ class BookSearch extends Component {
 
     BooksAPI.search(query.trim(), 20).then(books => {
       if (books.length > 0) {
+        this.updateExistingBooks(books, existingBooks);
         this.setState({
           books: books,
           searching: false
@@ -51,8 +52,21 @@ class BookSearch extends Component {
     });
   };
 
+  updateExistingBooks = (books, existingBooks) => {
+    for (let book of books) {
+      for (let existingBook of existingBooks) {
+        if (book.id === existingBook.id) {
+          book.shelf = existingBook.shelf;
+        }
+      }
+    }
+  };
+
   render() {
     const { books, searching } = this.state;
+    const existingBooks = this.props.mainState
+      ? this.props.mainState.books
+      : [];
 
     return (
       <div className="search-books">
@@ -64,7 +78,8 @@ class BookSearch extends Component {
             <Debounce time="500" handler="onChange">
               <input
                 type="text"
-                onChange={event => this.executeQuery(event.target.value)}
+                onChange={event =>
+                  this.executeQuery(event.target.value, existingBooks)}
                 placeholder="Search by title or author"
               />
             </Debounce>

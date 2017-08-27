@@ -35,9 +35,7 @@ class BookShelves extends Component {
     BooksAPI.update(book, shelf).then(response => {
       if (response) {
         book.shelf = shelf;
-        const books = this.state.currentlyReading
-          .concat(this.state.wantToRead)
-          .concat(this.state.read);
+        const books = this.getListOfBooks();
         this.arrangeBooks(books);
         this.handleMovingMessage(book);
       } else {
@@ -52,6 +50,12 @@ class BookShelves extends Component {
     } else {
       this.msg.success(`Moved '${book.title}'.`);
     }
+  };
+
+  getListOfBooks = () => {
+    return this.state.currentlyReading
+      .concat(this.state.wantToRead)
+      .concat(this.state.read);
   };
 
   render() {
@@ -82,7 +86,14 @@ class BookShelves extends Component {
           </div>
         </div>
         <div className="open-search">
-          <Link to="/search">Add a book</Link>
+          <Link
+            to={{
+              pathname: '/search',
+              state: { books: this.getListOfBooks() }
+            }}
+          >
+            Add a book
+          </Link>
         </div>
         <div>
           <AlertContainer ref={a => (this.msg = a)} {...this.alertOptions} />

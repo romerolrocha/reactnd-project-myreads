@@ -9,7 +9,10 @@ class App extends React.Component {
     return (
       <div className="app">
         <Route exact path="/" render={() => <BookShelves />} />
-        <Route path="/search" render={() => <BookSearch />} />
+        <Route
+          path="/search"
+          render={({ location }) => <BookSearch mainState={location.state} />}
+        />
       </div>
     );
   }
