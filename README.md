@@ -1,4 +1,4 @@
-This is the part of Udacity's React Nanodegree. It's the implementation of Part I - React Fundamentals - project.
+This is part of Udacity's React Nanodegree. It's the implementation of Part I - React Fundamentals - project.
 
 It's built for academic purposes only.
 
