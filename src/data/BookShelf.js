@@ -14,8 +14,10 @@ class BookShelf extends Component {
     loading: true
   };
 
-  componentWillReceiveProps() {
-    this.setState({ loading: false });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props) {
+      this.setState({ loading: false });
+    }
   }
 
   render() {

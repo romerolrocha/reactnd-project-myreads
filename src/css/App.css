@@ -104,12 +104,8 @@ body,
 .search-books-results {
   padding: 80px 10px 20px;
 }
-.results-text {
-  text-align: center;
-}
 
 /* books grid */
-
 .books-grid {
   list-style-type: none;
   padding: 0;

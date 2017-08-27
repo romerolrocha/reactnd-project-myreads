@@ -4,10 +4,12 @@ import { Debounce } from 'react-throttle';
 import * as BooksAPI from './api/BooksAPI';
 import BookList from './data/BookList';
 import AlertContainer from 'react-alert';
+import ReactLoading from 'react-loading';
 
 class BookSearch extends Component {
   state = {
-    books: []
+    books: [],
+    searching: false
   };
 
   alertOptions = {
@@ -24,7 +26,10 @@ class BookSearch extends Component {
       return;
     }
 
+    this.setState({ searching: true });
+
     BooksAPI.search(query.trim(), 20).then(books => {
+      this.setState({ searching: false });
       if (books.length > 0) {
         this.setState({ books });
       } else {
@@ -45,7 +50,7 @@ class BookSearch extends Component {
   };
 
   render() {
-    const { books } = this.state;
+    const { books, searching } = this.state;
 
     return (
       <div className="search-books">
@@ -64,12 +69,14 @@ class BookSearch extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <h4 className="results-text">
-            {books.length > 0
-              ? `Showing ${books.length} results.`
-              : 'No results were found.'}
-          </h4>
-          <BookList books={books} moveBook={this.moveBook} />
+          {searching
+            ? <ReactLoading
+                type="spin"
+                delay={1}
+                color="#6568a4"
+                className="loader"
+              />
+            : <BookList books={books} moveBook={this.moveBook} />}
         </div>
         <div>
           <AlertContainer ref={a => (this.msg = a)} {...this.alertOptions} />
