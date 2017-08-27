@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import BookShelf from './data/BookShelf';
-import * as BooksAPI from './api/BooksAPI';
+import BookShelf from '../data/BookShelf';
+import * as BooksAPI from '../api/BooksAPI';
 import AlertContainer from 'react-alert';
 
 class BookShelves extends Component {
