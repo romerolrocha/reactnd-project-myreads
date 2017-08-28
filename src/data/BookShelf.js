@@ -28,16 +28,8 @@ class BookShelf extends Component {
         </h2>
         <div className="bookshelf-books">
           {this.state.loading
-            ? <ReactLoading
-                type="spin"
-                delay={1}
-                color="#6568a4"
-                className="loader"
-              />
-            : <BookList
-                books={this.props.books}
-                moveBook={this.props.moveBook}
-              />}
+            ? <ReactLoading type="spin" delay={1} color="#6568a4" className="loader" />
+            : <BookList books={this.props.books} moveBook={this.props.moveBook} />}
         </div>
       </div>
     );

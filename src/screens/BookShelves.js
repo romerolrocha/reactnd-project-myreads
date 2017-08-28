@@ -53,9 +53,7 @@ class BookShelves extends Component {
   };
 
   getListOfBooks = () => {
-    return this.state.currentlyReading
-      .concat(this.state.wantToRead)
-      .concat(this.state.read);
+    return this.state.currentlyReading.concat(this.state.wantToRead).concat(this.state.read);
   };
 
   render() {
@@ -75,23 +73,14 @@ class BookShelves extends Component {
             />
           </div>
           <div>
-            <BookShelf
-              title="Want to Read"
-              books={wantToRead}
-              moveBook={this.moveBook}
-            />
+            <BookShelf title="Want to Read" books={wantToRead} moveBook={this.moveBook} />
           </div>
           <div>
             <BookShelf title="Read" books={read} moveBook={this.moveBook} />
           </div>
         </div>
         <div className="open-search">
-          <Link
-            to={{
-              pathname: '/search',
-              state: { books: this.getListOfBooks() }
-            }}
-          >
+          <Link to={{ pathname: '/search', state: { books: this.getListOfBooks() } }}>
             Add a book
           </Link>
         </div>

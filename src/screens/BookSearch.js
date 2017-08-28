@@ -64,9 +64,7 @@ class BookSearch extends Component {
 
   render() {
     const { books, searching } = this.state;
-    const existingBooks = this.props.mainState
-      ? this.props.mainState.books
-      : [];
+    const existingBooks = this.props.mainState ? this.props.mainState.books : [];
 
     return (
       <div className="search-books">
@@ -78,8 +76,7 @@ class BookSearch extends Component {
             <Debounce time="500" handler="onChange">
               <input
                 type="text"
-                onChange={event =>
-                  this.executeQuery(event.target.value, existingBooks)}
+                onChange={event => this.executeQuery(event.target.value, existingBooks)}
                 placeholder="Search by title or author"
               />
             </Debounce>
@@ -87,12 +84,7 @@ class BookSearch extends Component {
         </div>
         <div className="search-books-results">
           {searching
-            ? <ReactLoading
-                type="spin"
-                delay={1}
-                color="#6568a4"
-                className="loader"
-              />
+            ? <ReactLoading type="spin" delay={1} color="#6568a4" className="loader" />
             : <BookList books={books} moveBook={this.moveBook} />}
         </div>
         <div>
