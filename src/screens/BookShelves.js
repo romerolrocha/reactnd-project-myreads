@@ -45,15 +45,18 @@ class BookShelves extends Component {
   };
 
   handleMovingMessage = book => {
-    if (book.shelf === 'none') {
-      this.msg.success(`Book '${book.title}' removed from shelf.`);
-    } else {
-      this.msg.success(`Moved '${book.title}'.`);
-    }
+    const response =
+      book.shelf === 'none'
+        ? `Book '${book.title}' removed from shelf.`
+        : `Moved '${book.title}'.`;
+    this.msg.success(response);
   };
 
   getListOfBooks = () => {
-    return this.state.currentlyReading.concat(this.state.wantToRead).concat(this.state.read);
+    return this.state.currentlyReading.concat(
+      this.state.wantToRead,
+      this.state.read
+    );
   };
 
   render() {
@@ -73,14 +76,23 @@ class BookShelves extends Component {
             />
           </div>
           <div>
-            <BookShelf title="Want to Read" books={wantToRead} moveBook={this.moveBook} />
+            <BookShelf
+              title="Want to Read"
+              books={wantToRead}
+              moveBook={this.moveBook}
+            />
           </div>
           <div>
             <BookShelf title="Read" books={read} moveBook={this.moveBook} />
           </div>
         </div>
         <div className="open-search">
-          <Link to={{ pathname: '/search', state: { books: this.getListOfBooks() } }}>
+          <Link
+            to={{
+              pathname: '/search',
+              state: { books: this.getListOfBooks() }
+            }}
+          >
             Add a book
           </Link>
         </div>
